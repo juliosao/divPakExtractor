@@ -7,7 +7,6 @@ int div_loadHeader(FILE* src, stDivArchiveHeader* hdr)
 {
 	int res;
 
-	printf("tell: %d\n",ftell(src));
 	res=fread(hdr->type,sizeof(hdr->type),1,src);
 	if(res<1)
 		return DIV_ERR_LOAD;
