@@ -1,0 +1,5 @@
+*.layout
+*.cbp
+bin
+obj
+.vscode
