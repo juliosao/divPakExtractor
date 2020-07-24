@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
+#include <stdlib.h>
 #include "div.h"
 #include "divPak.h"
 
@@ -20,7 +21,17 @@ int divPak_load(FILE *f, stDivPak *a)
     if(res<1)
         return DIV_ERR_LOAD;
 
-    
+    a->files = malloc(a->numFiles * sizeof(stDivPakFileDef));
+	if (a->files == NULL)
+		return DIV_ERR_MEM; 
+
+	res = fread(a->files, sizeof(stDivPakFileDef), a->numFiles, f);
+	if (res < a->numFiles)
+		return DIV_ERR_LOAD;
+
+    int t = ftell(f);   
+    printf("Tell: %u\n",t);
+    printf("1: %u, %u\n",a->files[0].offset,a->files[0].offset+8);
 
     return 0;
 
@@ -28,5 +39,8 @@ int divPak_load(FILE *f, stDivPak *a)
 
 void divPak_unload(stDivPak *a)
 {
-
+    if(a->files != NULL)
+    {
+        free(a->files);
+    }
 }

@@ -38,6 +38,11 @@ int main(int argc, char** argv)
 			printf("Magia: %8.8X\n",a.hdr.magic);
             printf("Version: %u\n",(unsigned int)a.hdr.version);    
 			printf("Número de ficheros: %u\n",(unsigned int)a.numFiles);
+
+			for(idx=0; idx<a.numFiles; idx++)
+            {
+                printf("Fichero %d: %s. offset=%u plen=%u len=%u,\n",(idx+1),a.files[idx].name,(unsigned)a.files[idx].offset,(unsigned)a.files[idx].packedLen,(unsigned)a.files[idx].len);                
+            }
 		}
 		divPak_unload(&a);
     }
