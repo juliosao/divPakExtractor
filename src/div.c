@@ -3,7 +3,7 @@
 #include <errno.h>
 #include "div.h"
 
-int div_loadHeader(FILE* src, stDivArchiveHeader* hdr)
+DIV_RESULT div_loadHeader(FILE* src, stDivArchiveHeader* hdr)
 {
 	int res;
 

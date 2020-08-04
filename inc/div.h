@@ -1,4 +1,5 @@
 #ifndef __DIV_H_INC__
+#define __DIV_H_INC__
 
 /**
  * \brief Numero "magico" comun a todos los ficheros de DIV
@@ -6,29 +7,23 @@
 #define DIV_FILE_MAGIC 0x000A0D1A
 
 /**
+ * \brief Valores de retorno de multiples funciones
+ */
+typedef enum _DIV_RESULT {
+	DIV_OK = 0, /**< Todo OK */
+	DIV_ERR_OTHER = -1, /**< Error generico */
+	DIV_ERR_LOAD = -2, /**< Error al leer un fichero */
+	DIV_ERR_MAGIC = -3, /**< Error al comprobar la magia de un fichero*/
+	DIV_ERR_FTYPE = -4, /**< El tipo de fichero no es correcto */
+	DIV_ERR_MEM = -5, /**< Sin memoria para la operación*/
+	DIV_ERR_WRITE = -6 /**< Error al escribir un fichero */
+} DIV_RESULT;
+
+
+/**
  * \brief Longitud del header en disco
  */
 #define DIV_FILE_HDR_LEN 8
-
-/**
- * \brief Error al leer del fichero
- */
-#define DIV_ERR_LOAD -1
-
-/**
- * \brief Error al comprobar la "magia"
- */
-#define DIV_ERR_MAGIC -2
-
-/**
- * \brief Error al comprobar el tipo de fichero
- */
-#define DIV_ERR_FTYPE -3
-
-/**
- * \brief Sin memoria para realizar la operación
- */
-#define DIV_ERR_MEM -4
 
 /**
  * \typedef stDivArchiveHeader
@@ -47,7 +42,7 @@ typedef struct _stDivArchiveHeader
  * \param src El fichero con los datos
  * \param hdr Puntero a estructura de tipo stDivArchiveHeader a rellenar con los datos leidos
  */
-int div_loadHeader(FILE* src, stDivArchiveHeader* hdr);
+DIV_RESULT div_loadHeader(FILE* src, stDivArchiveHeader* hdr);
 
 
 #endif

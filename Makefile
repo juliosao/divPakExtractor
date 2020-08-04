@@ -1,10 +1,10 @@
 .PHONY: clean
 CFLAGS=-std=gnu99 -g
-
+LIBS=-lz
 CFLAGS+=-I ./inc
 
 bin/divPakExporter: obj/main.o obj/div.o obj/divPak.o | bin
-	gcc obj/main.o obj/div.o obj/divPak.o -o bin/divInstallExporter
+	gcc $(LIBS) obj/main.o obj/div.o obj/divPak.o -o bin/divInstallExporter
 
 obj/main.o: src/main.c | obj
 	gcc src/main.c $(CFLAGS) -c -o obj/main.o
