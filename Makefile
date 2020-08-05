@@ -1,7 +1,13 @@
 .PHONY: clean
 CFLAGS=-std=gnu99 -g
-LIBS=-lz
 CFLAGS+=-I ./inc
+
+ifeq ($(OS),Windows_NT)
+LIBS=-L ./zlib -l:zlib1.dll
+CFLAGS+= -I ./zlib
+else
+LIBS=-lz
+endif
 
 bin/divPakExporter: obj/main.o obj/div.o obj/divPak.o | bin
 	gcc $(LIBS) obj/main.o obj/div.o obj/divPak.o -o bin/divInstallExporter
